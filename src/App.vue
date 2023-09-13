@@ -61,6 +61,17 @@ function updateMovieRating(value, index) {
             </MovieCard>
         </div>
     </div>
-    <AddMovieModal />
+    <AddMovieModal>
+        <template v-slot:actions>
+            <div class="flex">
+                <button class="mr-auto ml-8 bg-yellow-500 p-4 rounded w-[100px] font-bold">
+                    Cancel
+                </button>
+                <button class="ml-auto mr-8 bg-yellow-500 p-4 rounded w-[100px] font-bold">
+                    Add
+                </button>
+            </div>
+        </template>
+    </AddMovieModal>
 </template>
 <style scoped></style>
