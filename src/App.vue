@@ -2,7 +2,7 @@
 import Chip from './Chip.vue';
 import MovieCard from './MovieCard.vue';
 import { items } from './movies.json';
-import { reactive } from 'vue';
+import { reactive, ref} from 'vue';
 import Rating from './Rating.vue';
 import ActionBar from './ActionBar.vue';
 import AddMovieModal from './AddMovieModal.vue';
@@ -13,9 +13,17 @@ import AddMovieModal from './AddMovieModal.vue';
 import { StarIcon } from '@heroicons/vue/24/solid';
 
 const movies = reactive(items);
+const isModalVisible = ref(false);
 
 function updateMovieRating(value, index) {
     movies[index].rating = value;
+}
+
+function closeModal() {
+    isModalVisible.value = false;
+}
+function showAddMovieModal() {
+    isModalVisible.value = true;
 }
 </script>
 
@@ -23,7 +31,7 @@ function updateMovieRating(value, index) {
     <!-- This is where your template goes	-->
     <div class="flex flex-col gap-8 p-8">
         <ActionBar>
-            <button class="p-4 bg-yellow-500 rounded font-bold">Add Movie</button>
+            <button class="p-4 bg-yellow-500 rounded font-bold" @click="showAddMovieModal">Add Movie</button>
         </ActionBar>
         <div class="flex gap-8">
             <MovieCard v-for="(movie, index) in movies" class="rounded relative">
@@ -61,10 +69,17 @@ function updateMovieRating(value, index) {
             </MovieCard>
         </div>
     </div>
-    <AddMovieModal>
+    <AddMovieModal :is-visible="isModalVisible">
+        <div class="flex flex-col gap-4 p-8">
+            <input type="text" placeholder="Name" />
+            <select>
+                <option>Select a category</option>
+            </select>
+            <textarea placeholder="description"></textarea>
+        </div>
         <template v-slot:actions>
             <div class="flex">
-                <button class="mr-auto ml-8 bg-yellow-500 p-4 rounded w-[100px] font-bold">
+                <button class="mr-auto ml-8 bg-yellow-500 p-4 rounded w-[100px] font-bold" @click="closeModal">
                     Cancel
                 </button>
                 <button class="ml-auto mr-8 bg-yellow-500 p-4 rounded w-[100px] font-bold">
