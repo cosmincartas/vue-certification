@@ -25,16 +25,19 @@
             <div class="w-full h-full flex items-center">
                 <slot name="rating"></slot>
             </div>
+            <div class="flex gap-4">
+                <slot name="actions"></slot>
+            </div>
         </div>
     </div>
 </template>
 <style scoped>
 .movie-card {
-    flex: 1;
+    width: 30%;
     grid-template-rows: 60% auto;
 }
 
 .movie-details {
-    grid-template-rows: auto 32px 1fr 20px;
+    grid-template-rows: auto 32px 1fr 20px 48px;
 }
 </style>
